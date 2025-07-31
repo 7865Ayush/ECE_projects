@@ -1,49 +1,54 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-entity BCH_7_SEGMENT is
-     Port ( bch : in STD_LOGIC_VECTOR (0 to 3);
- display : out STD_LOGIC_VECTOR(3 downto 0);
+entity BCH_7_TB is
+--  Port ( );
+end BCH_7_TB;
+architecture Behavioral of BCH_7_TB is
+ COMPONENT BCH_7_SEGMENT
+ PORT(
+ bch : in STD_LOGIC_VECTOR (0 to 3);
  led : out STD_LOGIC_VECTOR(0 to 7));
-end BCH_7_SEGMENT;
-architecture Behavioral of BCH_7_SEGMENT is
-begin
-display <="0000";
-process(bch)
-begin
-case bch is
- when "0000" =>
- led<= "00000011"; --0
- when "0001" =>
- led<= "10011111" ; --1
- when "0010" =>
-  led<=  "00100101"; --2
- when "0011" =>
-  led<=  "00001101"; --3
- when "0100" =>
-  led<=  "10011001"; --4
- when "0101" =>
-  led<=  "01001001"; -- 5
- when "0110" =>
-  led<= "01000001" ; --6
- when "0111" =>
-  led<=  "00011111"; --7
- when "1000" =>
-  led<=  "00000001"; --8
- when "1001" =>
-  led<=  "00001001"; --9
-   when "1010" =>
-  led<=  "00010011"; --A
-  when "1011" =>
-  led<=  "00000001"; --B
-  when "1100" =>
-  led<=  "01100011"; --C
-  when "1101" =>
-  led<=  "00000011"; --D
-  when "1110" =>
-  led<=  "01100001"; --E 
-  when "1111" =>
-  led<=  "01110001"; --F
-  end case;
-  end process;
-  end Behavioral;
-  
+ END COMPONENT;
+signal bch :STD_LOGIC_VECTOR (0 to 3):= "0000";
+ signal led : STD_LOGIC_VECTOR(0 to 7);
+  BEGIN
+ uut: BCH_7_SEGMENT PORT MAP (
+ bch => bch,
+ led=>led );
+ stim_proc: process
+ begin
+ bch <= "0000";
+ wait for 100 ns;
+ bch <= "0001";
+ wait for 100 ns;
+ bch <= "0010";
+ wait for 100 ns;
+ bch <= "0011";
+ wait for 100 ns;
+ bch <= "0100";
+ wait for 100 ns;
+ bch <= "0101";
+ wait for 100 ns;
+ bch <= "0110";
+ wait for 100 ns;
+ bch <= "0111";
+ wait for 100 ns;
+ bch <= "1000";
+ wait for 100 ns;
+ bch <= "1001";
+ wait for 100 ns;
+  bch <= "1010";
+ wait for 100 ns;
+ bch <= "1011";
+ wait for 100 ns;
+ bch <= "1100";
+ wait for 100 ns;
+ bch <= "1101";
+ wait for 100 ns;
+ bch <= "1110";
+ wait for 100 ns;
+ bch <= "1111";
+ wait for 100 ns;
+ WAIT;
+end process;
+end Behavioral;
